@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>mSocial - Campaign</title>
     <style>
-          body, html {
+        body, html {
             height: 100%;
             margin: 0;
             display: flex;
@@ -37,6 +37,26 @@
             font-size: 16px;
             cursor: pointer;
         }
+        .loading {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .message {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: yellow;
+            padding: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            border: 2px solid #000;
+        }
         @media (max-width: 600px) {
             .video-wrapper {
                 width: 95%; /* Width for mobile screens */
@@ -51,27 +71,54 @@
             }
         }
     </style>
+    <script>
+        function redeemOffer() {
+            const button = document.querySelector('.button-wrapper button');
+            const loading = document.querySelector('.loading');
+            const message = document.querySelector('.message');
+
+            button.disabled = true;
+            loading.style.display = 'block';
+
+            fetch('https://462dg3vi3e42y7tudtwmtdh5nu0rnpus.lambda-url.ap-south-1.on.aws/?wemail=vicky@sangagames.com&categ=8497')
+                .then(response => response.json())
+                .then(data => {
+                    loading.style.display = 'none';
+                    message.style.display = 'block';
+                    button.disabled = false;
+                })
+                .catch(error => {
+                    loading.style.display = 'none';
+                    alert('An error occurred. Please try again later.');
+                    button.disabled = false;
+                });
+        }
+    </script>
 </head>
 <body>
     <div class="container">
         <div class="video-wrapper">
-          <script src="https://fast.wistia.com/embed/medias/y1291k9rb2.jsonp" async></script>
-          <script src="https://fast.wistia.com/assets/external/E-v1.js" async></script>
-          <div class="wistia_responsive_padding" style="padding:56.25% 0 0 0;position:relative;">
-            <div class="wistia_responsive_wrapper" style="height:100%;left:0;position:absolute;top:0;width:100%;">
-              <div class="wistia_embed wistia_async_y1291k9rb2 seo=true videoFoam=true" style="height:100%;position:relative;width:100%">
-                <div class="wistia_swatch" style="height:100%;left:0;opacity:0;overflow:hidden;position:absolute;top:0;transition:opacity 200ms;width:100%;">
-                  <img src="https://fast.wistia.com/embed/medias/y1291k9rb2/swatch" style="filter:blur(5px);height:100%;object-fit:contain;width:100%;" alt="" aria-hidden="true" onload="this.parentNode.style.opacity=1;" />
+            <script src="https://fast.wistia.com/embed/medias/y1291k9rb2.jsonp" async></script>
+            <script src="https://fast.wistia.com/assets/external/E-v1.js" async></script>
+            <div class="wistia_responsive_padding" style="padding:56.25% 0 0 0;position:relative;">
+                <div class="wistia_responsive_wrapper" style="height:100%;left:0;position:absolute;top:0;width:100%;">
+                    <div class="wistia_embed wistia_async_y1291k9rb2 seo=true videoFoam=true" style="height:100%;position:relative;width:100%">
+                        <div class="wistia_swatch" style="height:100%;left:0;opacity:0;overflow:hidden;position:absolute;top:0;transition:opacity 200ms;width:100%;">
+                            <img src="https://fast.wistia.com/embed/medias/y1291k9rb2/swatch" style="filter:blur(5px);height:100%;object-fit:contain;width:100%;" alt="" aria-hidden="true" onload="this.parentNode.style.opacity=1;" />
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
         </div>
         <div class="button-wrapper">
-            <button onclick="alert('Offer Confirmation Sent to your mail')">Redeem Offer</button>
+            <button onclick="redeemOffer()">Redeem Offer</button>
+        </div>
+        <div class="loading">
+            <img src="https://i.gifer.com/YCZH.gif" alt="Loading..." />
+        </div>
+        <div class="message">
+            Offer will be sent to your mail along with a meeting schedule. Have a great day!
         </div>
     </div>
 </body>
 </html>
-
- 
