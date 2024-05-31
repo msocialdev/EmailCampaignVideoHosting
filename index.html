@@ -66,6 +66,35 @@
             return params.get('wemail');
         }
 
+        
+        function RecordVisitorLandedOnPage() {
+            const email = getEmailFromURL();
+            if (!email) {
+                alert('Email parameter is missing in the URL.');
+                return;
+            }
+
+            const url = `https://462dg3vi3e42y7tudtwmtdh5nu0rnpus.lambda-url.ap-south-1.on.aws/?wemail=${email}&categ=8494`;
+
+            fetch(url)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.text(); // Expecting plain text response
+                })
+                .then(data => {
+                    if (data === 'success') {
+                       console.log("Visitor recorded");
+                    } else {
+                        throw new Error('Unexpected response data');
+                    }
+                })
+                .catch(error => {
+                    console.log('An error occurred. Please try again later.');
+                });
+        }
+
         function redeemOffer() {
             const email = getEmailFromURL();
             if (!email) {
@@ -100,6 +129,7 @@
                     button.style.display = "none";
                 });
         }
+        RecordVisitorLandedOnPage();
     </script>
 </head>
 <body>
