@@ -72,7 +72,18 @@
         }
     </style>
     <script>
+        function getEmailFromURL() {
+            const params = new URLSearchParams(window.location.search);
+            return params.get('wemail');
+        }
+
         function redeemOffer() {
+            const email = getEmailFromURL();
+            if (!email) {
+                alert('Email parameter is missing in the URL.');
+                return;
+            }
+
             const button = document.querySelector('.button-wrapper button');
             const loading = document.querySelector('.loading');
             const message = document.querySelector('.message');
@@ -80,7 +91,9 @@
             button.disabled = true;
             loading.style.display = 'block';
 
-            fetch('https://462dg3vi3e42y7tudtwmtdh5nu0rnpus.lambda-url.ap-south-1.on.aws/?wemail=vicky@sangagames.com&categ=8497')
+            const url = `https://462dg3vi3e42y7tudtwmtdh5nu0rnpus.lambda-url.ap-south-1.on.aws/?wemail=${email}&categ=8497`;
+
+            fetch(url)
                 .then(response => response.json())
                 .then(data => {
                     loading.style.display = 'none';
