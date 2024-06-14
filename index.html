@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>mSocial Agency</title>
+    <link rel="icon" href="https://msocialverse.com/wp-content/uploads/2024/03/cropped-FavIcon-32x32.png" sizes="32x32">
+    <link rel="icon" href="https://msocialverse.com/wp-content/uploads/2024/03/cropped-FavIcon-192x192.png" sizes="192x192">
+    <title>mSocial Marketing Agency</title>
     <style>
         body, html {
             height: 100%;
@@ -15,49 +17,68 @@
         }
         .container {
             position: absolute;
-            width: 100%;
-            max-width: 1000px;
-            aspect-ratio: 16 / 9;
+            min-width: 50%;
+            width:800px;
+            max-width:95%;
+            height:100%;
+            /* background:red; */
+            left:50%;
+            transform: translateX(-50%);
         }
         .video-wrapper {
             position: absolute;
-            top: 40%;
+            top: 50%;
             left: 50%;
-            width: 80%;
+            width: 90%;
             transform: translate(-50%, -50%);
+            /* background:yellow; */
+        }
+        .logo
+        {
+            position: absolute;
+            top: 40px;
+            left: 50%;
+            width:30%;
+            max-width: 400px;
+            min-width:200px;
+            transform: translateX(-50%);
+            /* background:green; */
+        }
+        .logo img
+        {
+            width:100%;
+            height:auto;
+        }
+        .tag-line
+        {
+            position: absolute;
+            width:100%;
+            height:auto;
+            left: 50%;
+            top:-60px;
+            color:black;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size:3vh;
+            font-weight:bold;
+            text-align: center;
+            transform: translateX(-50%);
         }
         .button-wrapper {
             position: absolute;
-            bottom: 20px;
+            bottom: -90px;
             left: 50%;
             transform: translateX(-50%);
         }
         .button-wrapper button {
-            padding: 10px 20px;
+            padding: 15px 30px;
             font-size: 16px;
             cursor: pointer;
-        }
-        .message {
-            display: none;
-            background-color: yellow;
-            padding: 20px;
-            font-size: 18px;
-            font-weight: bold;
-            text-align: center;
-            border: 2px solid #000;
-        }
-        @media (max-width: 600px) {
-            .video-wrapper {
-                width: 95%; /* Width for mobile screens */
-            }
-            .button-wrapper {
-                bottom: -80px;
-            }
-            .button-wrapper button {
-                width: 100%;
-                padding: 15px;
-                font-size: 18px;
-            }
+            border:none;
+            color:white;
+            font-size:25px;
+            font-weight:bold;
+            border-radius: 7px;
+            background-color: rgb(255, 136, 0);
         }
     </style>
     <script>
@@ -134,7 +155,13 @@
 </head>
 <body>
     <div class="container">
+        <div class="logo">
+            <img src="images/logo.png">
+        </div>
+        
         <div class="video-wrapper">
+            <div class="tag-line">Grow your business by 300% in just 6 Months</div>
+
             <script src="https://fast.wistia.com/embed/medias/8wtjtx8fzu.jsonp" async></script>
             <script src="https://fast.wistia.com/assets/external/E-v1.js" async></script>
             <div class="wistia_responsive_padding" style="padding:56.25% 0 0 0;position:relative;">
@@ -146,13 +173,12 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="button-wrapper">
-            <button onclick="redeemOffer()">Redeem Offer</button>
-            <div class="message">
-                Offer sent to your mail. Have a great day!
+
+            <div class="button-wrapper">
+                <button onclick="DirectToBookCall()">Book a Call</button>
             </div>
         </div>
+        
         
     </div>
 </body>
