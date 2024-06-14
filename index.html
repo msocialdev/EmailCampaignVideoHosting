@@ -58,7 +58,7 @@
             top:-60px;
             color:black;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            font-size:3vh;
+            font-size: clamp(3vh, 4vw, 3.2vh);
             font-weight:bold;
             text-align: center;
             transform: translateX(-50%);
@@ -75,10 +75,19 @@
             cursor: pointer;
             border:none;
             color:white;
-            font-size:25px;
+            font-size: clamp(2.5vh, 3.5vw, 2.8vh);
             font-weight:bold;
             border-radius: 7px;
-            background-color: rgb(255, 136, 0);
+            background-color: rgb(255, 51, 0);
+        }
+        /* Media queries for different screen sizes */
+        @media (max-width: 768px) {
+            .tag-line {
+                font-size: clamp(2vh, 3vw, 2.4vh);
+            }
+            .button-wrapper button {
+                font-size: clamp(2vh, 3vw, 2.3vh);
+            }
         }
     </style>
     <script>
