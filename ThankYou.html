@@ -112,77 +112,6 @@
             }
         }
     </style>
-    <script>
-        function getEmailFromURL() {
-            const params = new URLSearchParams(window.location.search);
-            return params.get('wemail');
-        }
-
-        
-        function RecordVisitorLandedOnPage() {
-            const email = getEmailFromURL();
-            if (!email) {
-                console.log('Email parameter is missing in the URL.');
-                return;
-            }
-
-            const url = `https://462dg3vi3e42y7tudtwmtdh5nu0rnpus.lambda-url.ap-south-1.on.aws/?wemail=${email}&categ=8494`;
-
-            fetch(url)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    return response.text(); // Expecting plain text response
-                })
-                .then(data => {
-                    if (data === 'success') {
-                       console.log("Visitor recorded");
-                    } else {
-                        throw new Error('Unexpected response data');
-                    }
-                })
-                .catch(error => {
-                    console.log('An error occurred. Please try again later.');
-                });
-        }
-
-        function redeemOffer() {
-            const email = getEmailFromURL();
-            if (!email) {
-                alert('Email parameter is missing in the URL.');
-                return;
-            }
-
-            const button = document.querySelector('.button-wrapper button');
-            const message = document.querySelector('.message');
-
-            button.disabled = true;
-
-            const url = `https://462dg3vi3e42y7tudtwmtdh5nu0rnpus.lambda-url.ap-south-1.on.aws/?wemail=${email}&categ=8497`;
-
-            fetch(url)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    return response.text(); // Expecting plain text response
-                })
-                .then(data => {
-                    if (data === 'success') {
-                        message.style.display = 'block';
-                    } else {
-                        throw new Error('Unexpected response data');
-                    }
-                    button.style.display = "none";
-                })
-                .catch(error => {
-                    alert('An error occurred. Please try again later.');
-                    button.style.display = "none";
-                });
-        }
-        RecordVisitorLandedOnPage();
-    </script>
 </head>
 <body>
     <div class="container">
@@ -190,7 +119,7 @@
             <img src="images/logo.png">
         </div>
         
-        <div class="tag-line section">Grow your business by 300% in just 6 Months</div>
+        <div class="tag-line section">Thank you.</div>
         <div class="video-wrapper section">
             <script src="https://fast.wistia.com/embed/medias/8wtjtx8fzu.jsonp" async></script>
             <script src="https://fast.wistia.com/assets/external/E-v1.js" async></script>
@@ -204,10 +133,10 @@
                 </div>
             </div>
         </div>
-        <div class="button-wrapper section">
+        <!-- <div class="button-wrapper section">
             <button onclick="DirectToBookCall()">Book a Call</button>
         </div>
-        <div class="hint-line section">Please watch the video fully to continue</div>
+        <div class="hint-line section">Please watch the video fully to continue</div> -->
         
         
     </div>
