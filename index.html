@@ -77,6 +77,7 @@
             text-align: center;
             transform: translateX(-50%);
             padding-bottom:60px;
+            display:none;
         }
         .button-wrapper
         {
@@ -109,74 +110,6 @@
             }
             .button-wrapper button {
                 font-size: clamp(2vh, 3vw, 2.3vh);
-            }
-        }
-
-
-        .emoji-container {
-            position: fixed;
-            bottom: 0;
-            left:0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-        }
-
-        .emoji {
-            position: absolute;
-            font-size: 2rem;
-            bottom:-50px;
-            /* animation: moveUp var(--duration) ease-out forwards, fadeOut var(--duration) linear forwards;
-            animation-delay: var(--delay); */
-        }
-
-        .rotate-clockwise {
-            animation: rotateClockwise var(--duration) linear infinite;
-            animation-delay: var(--delay);
-        }
-
-        .rotate-counterclockwise {
-            animation: rotateCounterclockwise var(--duration) linear infinite;
-            animation-delay: var(--delay);
-        }
-
-        @keyframes moveUp {
-            0% {
-                transform: translateY(0pc) rotate(0deg);
-            }
-            100% {
-                transform: translateY(-200%) rotate(0deg);
-            }
-        }
-
-        @keyframes rotateClockwise {
-            0% {
-                transform: translateY(0px) rotate(0deg) scale(0.8);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-500px) rotate(360deg) scale(2);
-                opacity: 0;
-            }
-        }
-
-        @keyframes rotateCounterclockwise {
-            0% {
-                transform: translateY(0px) rotate(0deg) scale(0.8);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-500px) rotate(-360deg) scale(2);
-                opacity: 0;
-            }
-        }
-
-        @keyframes fadeOut {
-            0%, 50% {
-                opacity: 1;
-            }
-            85%, 100% {
-                opacity: 0;
             }
         }
     </style>
@@ -214,18 +147,15 @@
                     console.log('An error occurred. Please try again later.');
                 });
         }
+        RecordVisitorLandedOnPage();
 
         function redeemOffer() {
             const email = getEmailFromURL();
             if (!email) {
-                alert('Email parameter is missing in the URL.');
+                console.log('Email parameter is missing in the URL.');
                 return;
             }
 
-            const button = document.querySelector('.button-wrapper button');
-            const message = document.querySelector('.message');
-
-            button.disabled = true;
 
             const url = `https://462dg3vi3e42y7tudtwmtdh5nu0rnpus.lambda-url.ap-south-1.on.aws/?wemail=${email}&categ=8497`;
 
@@ -233,65 +163,42 @@
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Network response was not ok');
+                        offerRedeemed = false;
                     }
                     return response.text(); // Expecting plain text response
                 })
                 .then(data => {
                     if (data === 'success') {
-                        message.style.display = 'block';
+                        offerRedeemed = true;
+                        console.log("Offer Received");
                     } else {
+                        offerRedeemed = false;
                         throw new Error('Unexpected response data');
                     }
-                    button.style.display = "none";
                 })
                 .catch(error => {
                     alert('An error occurred. Please try again later.');
-                    button.style.display = "none";
+                    offerRedeemed = false;
                 });
         }
 
-        function DirectToCookCall()
+        function DirectToBookCall()
         {
-            //direct to this url if applicable
-            //https://calendly.com/msocialverse/call-with-msocial
+            if (watchedPercentage > 75)
+            {
+                window.location.href = 'https://calendly.com/msocialverse/call-with-msocial';
+            }
+            else
+            {
+                const message = document.querySelector('.hint-line');
+                message.style.display = 'block';
+            }
 
         }
 
-        RecordVisitorLandedOnPage();
     </script>
 </head>
 <body>
-    <div class="emoji-container"></div>
-    <script>
-        const emojis = ['👍', '👌', '😍', '🤞', '😜', '🤩', '🥳', '😇', '🤪', '😛','🎁'];
-        const container = document.querySelector('.emoji-container');
-    
-        function createEmoji() {
-            const emoji = document.createElement('div');
-            emoji.classList.add('emoji');
-            emoji.innerText = emojis[Math.floor(Math.random() * emojis.length)];
-            emoji.style.left = Math.random() * 100 + 'vw';
-            const duration = (Math.random() * 2 + 3) + 's';
-            const delay = Math.random() * 2 + 's';
-            emoji.style.setProperty('--duration', duration);
-            emoji.style.setProperty('--delay', delay);
-            
-            // Randomly assign a rotation direction
-            if (Math.random() > 0.5) {
-                emoji.classList.add('rotate-clockwise');
-            } else {
-                emoji.classList.add('rotate-counterclockwise');
-            }
-    
-            container.appendChild(emoji);
-    
-            setTimeout(() => {
-                emoji.remove();
-            }, (parseFloat(duration) + parseFloat(delay)) * 1000);
-        }
-    
-        setInterval(createEmoji, 700);
-    </script>
     <div class="container">
         <div class="logo section">
             <img src="images/logo.png">
@@ -318,5 +225,79 @@
         
         
     </div>
+
+    <script>
+        var watchedPercentage = 0;
+        var offerRedeemed = false;
+        function trackVideoProgress(video) {
+            const parts = 30;
+            const updateFrequency = 1; // Check every second
+            const cookieName = 'videoProgress';
+            
+            // Initialize or retrieve the watched parts from the cookie
+            let watchedParts = getCookie(cookieName) || '0'.repeat(parts);
+
+            video.addEventListener('timeupdate', function() {
+                const currentTime = video.currentTime;
+                const duration = video.duration;
+                const partLength = duration / parts;
+                const partIndex = Math.floor(currentTime / partLength);
+                
+                if (watchedParts[partIndex] === '0') {
+                    watchedParts = setCharAt(watchedParts, partIndex, '1');
+                    setCookie(cookieName, watchedParts, 365); // Store the updated cookie for 1 year
+                    watchedPercentage = calculateWatchedPercentage(watchedParts);
+                    console.log(watchedPercentage);
+                    if (offerRedeemed == false && watchedPercentage > 75)
+                    {
+                        offerRedeemed = true;
+                        redeemOffer();
+                    }
+                }
+
+            });
+
+            video.addEventListener('ended', function() {
+                console.log('Video ended! You watched ' + calculateWatchedPercentage(watchedParts) + '% of the video.');
+            });
+
+            function calculateWatchedPercentage(partsString) {
+                const watchedCount = partsString.split('').filter(char => char === '1').length;
+                return (watchedCount / parts) * 100;
+            }
+
+            function setCharAt(str, index, chr) {
+                if (index > str.length - 1) return str;
+                return str.substring(0, index) + chr + str.substring(index + 1);
+            }
+
+            function getCookie(name) {
+                const value = `; ${document.cookie}`;
+                const parts = value.split(`; ${name}=`);
+                if (parts.length === 2) return parts.pop().split(';').shift();
+            }
+
+            function setCookie(name, value, days) {
+                const d = new Date();
+                d.setTime(d.getTime() + (days * 24 * 60 * 60 * 1000));
+                const expires = `expires=${d.toUTCString()}`;
+                document.cookie = `${name}=${value}; ${expires}; path=/`;
+            }
+        }
+
+        // Function to continuously check for the video element
+        function checkForVideo() {
+            const video = document.querySelector('video');
+            if (video) {
+                trackVideoProgress(video);
+            } else {
+                setTimeout(checkForVideo, 500); // Check again after 500ms
+            }
+        }
+
+        // Start checking for the video element
+        checkForVideo();
+
+    </script>
 </body>
 </html>
