@@ -176,6 +176,8 @@
             const btn = document.querySelector('#submitBtn');
 
             btn.innerHTML = "Submitting...";
+            message.innerHTML = "wait for few seconds, redirecting shortly";
+            message.style.display = 'block';
             
             var email = getCookie("email");
             if(!email)
@@ -197,11 +199,11 @@
             // Send data to Google Apps Script
             fetch('https://script.google.com/macros/s/AKfycbxgudzhKEf8bNmRhan-H1ZAkr7arxKn1fgEoo4_NGnDoTbTGAxyEKueV1OCIPc6Uu3H1g/exec', {
                 method: 'POST',
-                mode: "no-cors", 
-                cache: "no-cache",
+                // mode: "no-cors", 
+                // cache: "no-cache",
                 redirect: "follow",
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': "text/plain;charse=utf=8"
                 },
                 body: JSON.stringify({ formdata: formData })
             })
@@ -212,6 +214,7 @@
                 } else {
                     // Handle errors
                     console.error('Failed to submit form data');
+                    console.log(response);
                     btn.innerHTML = "Submit";
                     message.innerHTML = "Form Failed to Submit";
                     message.style.display = 'block';
@@ -220,7 +223,7 @@
             .catch(error => {
                 console.error('Error:', error);
                 btn.innerHTML = "Submit";
-                message.innerHTML = "Form Failed to Submit";
+                message.innerHTML = "Error Submitting Form";
                 message.style.display = 'block';
             });
         }
