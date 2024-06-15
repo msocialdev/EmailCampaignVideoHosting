@@ -221,7 +221,7 @@
         <div class="button-wrapper section">
             <button onclick="DirectToBookCall()">Book a Call</button>
         </div>
-        <div class="hint-line section">Please watch the video fully to continue</div>
+        <div class="hint-line section">Please watch the full video to Book a Call</div>
         
         
     </div>
@@ -236,6 +236,8 @@
             
             // Initialize or retrieve the watched parts from the cookie
             let watchedParts = getCookie(cookieName) || '0'.repeat(parts);
+            watchedPercentage = calculateWatchedPercentage(watchedParts);
+            console.log(watchedPercentage);
 
             video.addEventListener('timeupdate', function() {
                 const currentTime = video.currentTime;
