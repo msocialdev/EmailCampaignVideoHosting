@@ -21,6 +21,7 @@
             /* background:red; */
             left:50%;
             transform: translateX(-50%);
+            padding-bottom:100px;
         }
         .section {
             position: relative;
@@ -196,6 +197,9 @@
             // Send data to Google Apps Script
             fetch('https://script.google.com/macros/s/AKfycbxgudzhKEf8bNmRhan-H1ZAkr7arxKn1fgEoo4_NGnDoTbTGAxyEKueV1OCIPc6Uu3H1g/exec', {
                 method: 'POST',
+                mode: "no-cors", 
+                cache: "no-cache",
+                redirect: "follow",
                 headers: {
                     'Content-Type': 'application/json'
                 },
