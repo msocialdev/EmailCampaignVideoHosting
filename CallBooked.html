@@ -5,12 +5,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="https://msocialverse.com/wp-content/uploads/2024/03/cropped-FavIcon-32x32.png" sizes="32x32">
     <link rel="icon" href="https://msocialverse.com/wp-content/uploads/2024/03/cropped-FavIcon-192x192.png" sizes="192x192">
-    <title>mSocial Marketing Agency</title>
+    <title>mSocial</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <style>
         body, html {
             margin: 0;
             border:none;
-            background-color: #f0f0f0;
+            background-color: #000;
+        }
+        .bg
+        {
+            position: fixed;
+            width:100%;
+            height:100%;
+            background-image: url(images/bg.jpg);
+            background-size: cover;       /* Ensures the image covers the entire area without distortion */
+            background-position: center;  /* Centers the image */
+            background-repeat: no-repeat; /* Prevents the image from repeating */
+            left:0px;
+            top:0px;
+            z-index:0;
+        }
+
+        .leftbg{
+            position: fixed;
+            width:100%;
+            height:100%;
+            background-image: url(images/controller.png);
+            background-size:contain;       /* Ensures the image covers the entire area without distortion */
+            background-position: center;  /* Centers the image */
+            background-repeat: no-repeat; /* Prevents the image from repeating */
+            left:-40%;
+            bottom:-35%;
+            z-index:1;
+            transform: rotate(10deg);
+        }
+        .rightbg{
+            position: fixed;
+            width:100%;
+            height:100%;
+            background-image: url(images/chair.png);
+            background-size: contain;       /* Ensures the image covers the entire area without distortion */
+            background-position: center;  /* Centers the image */
+            background-repeat: no-repeat; /* Prevents the image from repeating */
+            right:-32%;
+            bottom:-40%;
+            z-index:1;
         }
         .container {
             position: relative;
@@ -21,6 +63,7 @@
             /* background:red; */
             left:50%;
             transform: translateX(-50%);
+            z-index:2;
         }
         .section {
             position: relative;
@@ -33,16 +76,20 @@
         }
         .video-wrapper {
             left: 50%;
-            width: 90%;
+            width: 70%;
             transform: translateX(-50%);
+            border:1px solid #FD9E26;
+            background: #FD9E26;
+            border-radius:25px;
+            box-sizing: border-box;
             /* background:yellow; */
         }
         .logo
         {
             position: relative;
-            padding-top:20px;
+            padding-top:55px;
             left: 50%;
-            width:30%;
+            width:22%;
             max-width: 400px;
             min-width:200px;
             transform: translateX(-50%);
@@ -57,13 +104,26 @@
         {
             width:100%;
             height:auto;
-            color:black;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            font-size: clamp(3vh, 4vw, 3.2vh);
+            color:white;
+            font-family:  "Poppins", sans-serif;
+            font-size: clamp(6.2vh, 7.2vw, 6.4vh);
             font-weight:bold;
             text-align: center;
+            padding:10px;
+            padding-top:10px;;
+        }
+        
+        .sub-tag-line
+        {
+            width:100%;
+            height:auto;
+            color:white;
+            font-family:  "Poppins", sans-serif;
+            font-size: clamp(3.2vh, 4.2vw, 3.2vh);
+            text-align: center;
             padding:20px;
-            padding-top:50px;;
+            padding-top:5px;
+            font-weight: 250;
         }
         .hint-line
         {
@@ -71,7 +131,7 @@
             height:auto;
             left: 50%;
             color:black;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family:  "Poppins", sans-serif;
             font-size: clamp(2vh, 3vw, 2.5vh);
             font-weight:400;
             text-align: center;
@@ -81,7 +141,7 @@
         }
         .button-wrapper
         {
-            padding-top:20px;
+            padding-top:40px;
         }
         .button-wrapper button {
             position: relative;
@@ -91,9 +151,10 @@
             border:none;
             color:white;
             font-size: clamp(2.5vh, 3.5vw, 2.8vh);
+            font-family:  "Poppins", sans-serif;
             font-weight:bold;
-            border-radius: 4px;
-            background-color: rgba(255, 51, 0, 0.856);
+            border-radius: 10px;
+            background:linear-gradient(to right, #C41B19, #FD9F26);
             left: 50%;
             transform: translateX(-50%);
         }
@@ -103,13 +164,40 @@
         /* Media queries for different screen sizes */
         @media (max-width: 768px) {
             .tag-line {
-                font-size: clamp(2vh, 3vw, 2.4vh);
+                font-size: clamp(5vh, 5.7vw, 5.1vh);
+            }
+            .sub-tag-line
+            {
+                font-size: clamp(2.6vh, 3.6vw, 2.6vh);
             }
             .hint-line {
                 font-size: clamp(1.5vh, 2.5vw, 2vh);
             }
             .button-wrapper button {
-                font-size: clamp(2vh, 3vw, 2.3vh);
+                font-size: clamp(2.5vh, 3.5vw, 2.8vh);
+            }
+            
+            .logo
+            {
+                padding-top:20px;
+            }
+
+            .leftbg{
+                width:100%;
+                height:100%;
+                left:-45%;
+                bottom:-40%;
+                transform: rotate(30deg);
+            }
+            .rightbg{
+                width:120%;
+                height:120%;
+                right:-37%;
+                bottom:-55%;
+            }
+            
+            .video-wrapper {
+                width: 95%;
             }
         }
     </style>
@@ -142,12 +230,22 @@
 </script>
 </head>
 <body>
+
+    <!-- bgeffects -->
+    <div class="bg"></div>
+    <div class="leftbg"></div>
+    <div class="rightbg"></div>
+
     <div class="container">
         <div class="logo section">
             <img src="images/logo.png">
         </div>
+
+        <div class="tag-line section">Call Booked &#128077; <span style="background: linear-gradient(to right, #e04d13, #d48a28); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"></span></div>
         
-        <div class="tag-line section">Call Booked &#128077;, Let's Understand your requirement better</div>
+        <div class="sub-tag-line section">Let's Understand your <b>Business</b> better.</div>
+
+
         <div class="video-wrapper section">
             <script src="https://fast.wistia.com/embed/medias/bq72xaor9b.jsonp" async></script>
             <script src="https://fast.wistia.com/assets/external/E-v1.js" async></script>
