@@ -458,7 +458,9 @@
                 setTimeout(checkForVideo, 500); // Check again after 500ms
             }
         }
-
+        // Start checking for the video element
+        checkForVideo();
+        
         document.body.addEventListener('click', function(event) {
             // Check if the target is the button or the span inside the button
             let targetElement = event.target;
