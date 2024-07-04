@@ -274,7 +274,7 @@
                 return;
             }
 
-            const url = `https://462dg3vi3e42y7tudtwmtdh5nu0rnpus.lambda-url.ap-south-1.on.aws/?wemail=${email}&categ=8494`;
+            const url = `https://7defxhh6t3vjashcxhfrxuamem0gnmnf.lambda-url.ap-south-1.on.aws/?wemail=${email}&categ=9783`;
 
             fetch(url)
                 .then(response => {
@@ -296,50 +296,51 @@
         }
         RecordVisitorLandedOnPage();
 
-        function redeemOffer() {
-            const email = getEmailFromURL();
-            if (!email) {
-                console.log('Email parameter is missing in the URL.');
-                return;
-            }
+        // function redeemOffer() {
+        //     const email = getEmailFromURL();
+        //     if (!email) {
+        //         console.log('Email parameter is missing in the URL.');
+        //         return;
+        //     }
 
 
-            const url = `https://462dg3vi3e42y7tudtwmtdh5nu0rnpus.lambda-url.ap-south-1.on.aws/?wemail=${email}&categ=8497`;
+        //     const url = `https://7defxhh6t3vjashcxhfrxuamem0gnmnf.lambda-url.ap-south-1.on.aws/?wemail=${email}&categ=8497`;
 
-            fetch(url)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                        offerRedeemed = false;
-                    }
-                    return response.text(); // Expecting plain text response
-                })
-                .then(data => {
-                    if (data === 'success') {
-                        offerRedeemed = true;
-                        console.log("Offer Received");
-                    } else {
-                        offerRedeemed = false;
-                        throw new Error('Unexpected response data');
-                    }
-                })
-                .catch(error => {
-                    alert('An error occurred. Please try again later.');
-                    offerRedeemed = false;
-                });
-        }
+        //     fetch(url)
+        //         .then(response => {
+        //             if (!response.ok) {
+        //                 throw new Error('Network response was not ok');
+        //                 offerRedeemed = false;
+        //             }
+        //             return response.text(); // Expecting plain text response
+        //         })
+        //         .then(data => {
+        //             if (data === 'success') {
+        //                 offerRedeemed = true;
+        //                 console.log("Offer Received");
+        //             } else {
+        //                 offerRedeemed = false;
+        //                 throw new Error('Unexpected response data');
+        //             }
+        //         })
+        //         .catch(error => {
+        //             alert('An error occurred. Please try again later.');
+        //             offerRedeemed = false;
+        //         });
+        // }
 
         function DirectToBookCall()
         {
-            if (watchedPercentage > 75)
-            {
-                window.location.href = 'https://calendly.com/msocialverse/call-with-msocial';
-            }
-            else
-            {
-                const message = document.querySelector('.hint-line');
-                message.style.display = 'block';
-            }
+            window.location.href = 'https://calendly.com/msocialverse/call-w-msocial-n-ap';
+            // if (watchedPercentage > 75)
+            // {
+            //     window.location.href = 'https://calendly.com/msocialverse/call-w-msocial-n-ap';
+            // }
+            // else
+            // {
+            //     const message = document.querySelector('.hint-line');
+            //     message.style.display = 'block';
+            // }
 
         }
 
@@ -415,7 +416,7 @@
                     if (offerRedeemed == false && watchedPercentage > 75)
                     {
                         offerRedeemed = true;
-                        redeemOffer();
+                        // redeemOffer();
                     }
                 }
 
@@ -487,7 +488,7 @@
             }
 
 
-            const url = `https://462dg3vi3e42y7tudtwmtdh5nu0rnpus.lambda-url.ap-south-1.on.aws/?wemail=${email}&categ=8904`;
+            const url = `https://7defxhh6t3vjashcxhfrxuamem0gnmnf.lambda-url.ap-south-1.on.aws/?wemail=${email}&categ=9788`;
 
             fetch(url)
                 .then(response => {

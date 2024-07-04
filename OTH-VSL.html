@@ -254,9 +254,20 @@
     </style>
 
 <script>
+    function RedirectCheck()
+    {
+        const params = new URLSearchParams(window.location.search);
+        temp_email = params.get('invitee_email');
+        if(temp_email)
+            window.location.href = `https://info.msocialverse.com/OTH-VSL.html?wemail=${temp_email}`;
+    }
+
+    RedirectCheck();
+
+
     function getEmailFromURL() {
         const params = new URLSearchParams(window.location.search);
-        return params.get('invitee_email');
+        return params.get('wemail');
     }
 
     function GotoForm()
@@ -266,15 +277,21 @@
         {
             email = getEmailFromURL();
         }
-        if (watchedPercentage > 75)
-        {
-            window.location.href = `https://info.msocialverse.com/Form.html?invitee_email=${email}`;
-        }
-        else
-        {
-            const message = document.querySelector('.hint-line');
-            message.style.display = 'block';
-        }
+        window.location.href = `https://info.msocialverse.com/OTH-Form.html?invitee_email=${email}`;
+        // var email = getCookie("email");
+        // if(!email)
+        // {
+        //     email = getEmailFromURL();
+        // }
+        // if (watchedPercentage > 75)
+        // {
+        //     window.location.href = `https://info.msocialverse.com/Form.html?invitee_email=${email}`;
+        // }
+        // else
+        // {
+        //     const message = document.querySelector('.hint-line');
+        //     message.style.display = 'block';
+        // }
 
     }
 
@@ -324,49 +341,49 @@
 
     
     <script>
-        var watchedPercentage = 0;
-        var offerRedeemed = false;
-        function trackVideoProgress(video) {
-            const parts = 30;
-            const updateFrequency = 1; // Check every second
-            const cookieName = 'video2Progress';
+        // var watchedPercentage = 0;
+        // var offerRedeemed = false;
+        // function trackVideoProgress(video) {
+        //     const parts = 30;
+        //     const updateFrequency = 1; // Check every second
+        //     const cookieName = 'video2Progress';
             
-            // Initialize or retrieve the watched parts from the cookie
-            let watchedParts = getCookie(cookieName) || '0'.repeat(parts);
-            watchedPercentage = calculateWatchedPercentage(watchedParts);
-            console.log(watchedPercentage);
+        //     // Initialize or retrieve the watched parts from the cookie
+        //     let watchedParts = getCookie(cookieName) || '0'.repeat(parts);
+        //     watchedPercentage = calculateWatchedPercentage(watchedParts);
+        //     console.log(watchedPercentage);
 
-            video.addEventListener('timeupdate', function() {
-                const currentTime = video.currentTime;
-                const duration = video.duration;
-                const partLength = duration / parts;
-                const partIndex = Math.floor(currentTime / partLength);
+        //     video.addEventListener('timeupdate', function() {
+        //         const currentTime = video.currentTime;
+        //         const duration = video.duration;
+        //         const partLength = duration / parts;
+        //         const partIndex = Math.floor(currentTime / partLength);
                 
-                if (watchedParts[partIndex] === '0') {
-                    watchedParts = setCharAt(watchedParts, partIndex, '1');
-                    setCookie(cookieName, watchedParts, 365); // Store the updated cookie for 1 year
-                    watchedPercentage = calculateWatchedPercentage(watchedParts);
-                    console.log(watchedPercentage);
-                }
+        //         if (watchedParts[partIndex] === '0') {
+        //             watchedParts = setCharAt(watchedParts, partIndex, '1');
+        //             setCookie(cookieName, watchedParts, 365); // Store the updated cookie for 1 year
+        //             watchedPercentage = calculateWatchedPercentage(watchedParts);
+        //             console.log(watchedPercentage);
+        //         }
 
-            });
+        //     });
 
-            video.addEventListener('ended', function() {
-                console.log('Video ended! You watched ' + calculateWatchedPercentage(watchedParts) + '% of the video.');
-            });
+        //     video.addEventListener('ended', function() {
+        //         console.log('Video ended! You watched ' + calculateWatchedPercentage(watchedParts) + '% of the video.');
+        //     });
 
-            function calculateWatchedPercentage(partsString) {
-                const watchedCount = partsString.split('').filter(char => char === '1').length;
-                return (watchedCount / parts) * 100;
-            }
+        //     function calculateWatchedPercentage(partsString) {
+        //         const watchedCount = partsString.split('').filter(char => char === '1').length;
+        //         return (watchedCount / parts) * 100;
+        //     }
 
-            function setCharAt(str, index, chr) {
-                if (index > str.length - 1) return str;
-                return str.substring(0, index) + chr + str.substring(index + 1);
-            }
+        //     function setCharAt(str, index, chr) {
+        //         if (index > str.length - 1) return str;
+        //         return str.substring(0, index) + chr + str.substring(index + 1);
+        //     }
 
            
-        }
+        // }
 
         function getCookie(name) {
             const value = `; ${document.cookie}`;
@@ -381,24 +398,24 @@
             document.cookie = `${name}=${value}; ${expires}; path=/`;
         }
 
-        // Function to continuously check for the video element
-        function checkForVideo() {
-            const video = document.querySelector('video');
-            if (video) {
-                trackVideoProgress(video);
-                var tmpEmail = getEmailFromURL();
-                if(tmpEmail)
-                {
-                    setCookie("email",tmpEmail,365);
-                }
+        // // Function to continuously check for the video element
+        // function checkForVideo() {
+        //     const video = document.querySelector('video');
+        //     if (video) {
+        //         trackVideoProgress(video);
+        //         var tmpEmail = getEmailFromURL();
+        //         if(tmpEmail)
+        //         {
+        //             setCookie("email",tmpEmail,365);
+        //         }
 
-            } else {
-                setTimeout(checkForVideo, 500); // Check again after 500ms
-            }
-        }
+        //     } else {
+        //         setTimeout(checkForVideo, 500); // Check again after 500ms
+        //     }
+        // }
 
-        // Start checking for the video element
-        checkForVideo();
+        // // Start checking for the video element
+        // checkForVideo();
 
     </script>
 </body>
